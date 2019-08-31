@@ -23,6 +23,7 @@ func main() {
 	router.GET("/mapselectkeys", MapKeys)
 	router.GET("/tables", Tables)
 	router.GET("/tables2", Tables2)
+	router.GET("/layout", Layout)
 	//router.POST("/somePost", posting)
 	//router.PUT("/somePut", putting)
 	//router.DELETE("/someDelete", deleting)
@@ -91,6 +92,16 @@ func Tables2(context *gin.Context) {
 	}
 
 	context.HTML(http.StatusOK, "tables2.html", gin.H{"values": values})
+}
+
+//http://172.16.155.190:8080/layout
+func Layout(context *gin.Context) {
+	var values []Foo
+	for i := 0; i < 5; i++ {
+		values = append(values, Foo{Value1: i, Value2: "value " + strconv.Itoa(i)})
+	}
+
+	context.HTML(http.StatusOK, "layout.html", gin.H{"title": "布局页面"})
 }
 
 //http://172.16.155.190:8080/map
