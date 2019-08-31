@@ -21,6 +21,8 @@ func main() {
 	router.GET("/map", Map)
 	router.GET("/mapkeys", MapKeys)
 	router.GET("/mapselectkeys", MapKeys)
+	router.GET("/tables", Tables)
+	router.GET("/tables2", Tables2)
 	//router.POST("/somePost", posting)
 	//router.PUT("/somePut", putting)
 	//router.DELETE("/someDelete", deleting)
@@ -68,6 +70,27 @@ func ArrayStruct(context *gin.Context) {
 	}
 
 	context.HTML(http.StatusOK, "arraystruct.html", gin.H{"values": values})
+}
+
+//http://172.16.155.190:8080/tables
+func Tables(context *gin.Context) {
+	var values []Foo
+	for i := 0; i < 5; i++ {
+		values = append(values, Foo{Value1: i, Value2: "value " + strconv.Itoa(i)})
+	}
+
+	context.HTML(http.StatusOK, "tables.html", gin.H{"values": values})
+}
+
+//kind of beauty than tables
+//http://172.16.155.190:8080/tables2
+func Tables2(context *gin.Context) {
+	var values []Foo
+	for i := 0; i < 5; i++ {
+		values = append(values, Foo{Value1: i, Value2: "value " + strconv.Itoa(i)})
+	}
+
+	context.HTML(http.StatusOK, "tables2.html", gin.H{"values": values})
 }
 
 //http://172.16.155.190:8080/map
